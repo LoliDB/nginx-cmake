@@ -257,6 +257,12 @@ set_target_properties(nginx PROPERTIES
 	VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/nginx
 )
 
+# 拷贝html文件夹
+add_custom_command(TARGET nginx POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	${CMAKE_SOURCE_DIR}/nginx/docs/html ${CMAKE_SOURCE_DIR}/nginx/html
+)
+
 # 构建调试启动时需要的目录
 set(check_directories
 	${CMAKE_SOURCE_DIR}/nginx/logs
